@@ -1,0 +1,20 @@
+/* components/sections/Produk.module.css */
+
+.produk {
+  /* latar default santan, tidak ada perubahan */
+}
+
+.judul {
+  margin-bottom: 8px;
+}
+
+.list {
+  margin-top: 8px;
+}
+
+.catatan {
+  margin-top: 24px;
+  font-size: 14px;
+  color: #666;
+  max-width: 55ch;
+}

@@ -1,0 +1,90 @@
+/* components/layout/Footer.module.css */
+
+.footer {
+  background-color: var(--janur-tua);
+  color: var(--santan);
+  padding-block: 48px 24px;
+}
+
+.divider {
+  margin-bottom: 40px;
+  /* Override warna divider untuk latar gelap */
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+
+@media (min-width: 768px) {
+  .inner {
+    grid-template-columns: 2fr 1fr 2fr;
+    gap: 48px;
+    align-items: start;
+  }
+}
+
+.brand {}
+
+.name {
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: var(--santan);
+  max-width: unset;
+  line-height: 1.2;
+}
+
+.tagline {
+  margin-top: 8px;
+  font-size: 14px;
+  color: var(--daun-pucat);
+  max-width: 40ch;
+}
+
+.links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.link {
+  color: var(--daun-pucat);
+  font-size: 15px;
+  text-decoration: none;
+  transition: color 150ms;
+}
+
+.link:hover,
+.link:focus-visible {
+  color: var(--santan);
+}
+
+.contact {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--daun-pucat);
+}
+
+.contactLabel {
+  font-weight: 700;
+  color: var(--santan);
+  margin-bottom: 4px;
+  font-size: 15px;
+  max-width: unset;
+}
+
+.copy {
+  margin-top: 40px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 24px;
+}
+
+.copy p {
+  font-size: 13px;
+  color: var(--daun-pucat);
+  max-width: unset;
+}

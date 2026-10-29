@@ -1,0 +1,149 @@
+/* app/globals.css — Design tokens, reset, dan gaya dasar */
+
+/* ─── Google Fonts diimpor via next/font/google di layout.jsx ─── */
+
+/* ─── Design Tokens ─────────────────────────────────────────────── */
+:root {
+  --janur-tua: #1f4d2b;
+  --janur-muda: #8db255;
+  --santan: #f2f5ea;
+  --arang: #1c2820;
+  --kunyit: #e0a21b;
+  --daun-pucat: #dce6c8;
+
+  /* Tipografi */
+  --font-display: var(--font-young-serif), Georgia, serif;
+  --font-body: var(--font-plus-jakarta), system-ui, sans-serif;
+
+  /* Jarak */
+  --section-gap: clamp(64px, 10vw, 128px);
+  --content-max: 1120px;
+  --px-mobile: 20px;
+  --px-desktop: 32px;
+}
+
+/* ─── Reset ──────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--santan);
+  color: var(--arang);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100dvh;
+}
+
+/* ─── Gaya Fokus (aksesibilitas) ──────────────────────────────────── */
+:focus-visible {
+  outline: 3px solid var(--kunyit);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ─── Tipografi dasar ─────────────────────────────────────────────── */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  line-height: 1.1;
+  color: var(--janur-tua);
+}
+
+h1 { font-size: clamp(44px, 8vw, 88px); }
+h2 { font-size: 36px; }
+h3 { font-size: 22px; }
+
+p {
+  max-width: 65ch;
+  line-height: 1.65;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ─── Container ──────────────────────────────────────────────────── */
+.container {
+  width: 100%;
+  max-width: var(--content-max);
+  margin-inline: auto;
+  padding-inline: var(--px-mobile);
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding-inline: var(--px-desktop);
+  }
+}
+
+/* ─── Section spacing ────────────────────────────────────────────── */
+.section {
+  padding-block: var(--section-gap);
+}
+
+.section--alt {
+  background-color: var(--daun-pucat);
+}
+
+/* ─── Divider belah ketupat ──────────────────────────────────────── */
+.ketupat-divider {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-block: 24px;
+}
+
+.ketupat-divider__line {
+  flex: 1;
+  height: 1px;
+  background-color: var(--daun-pucat);
+}
+
+/* ─── Penanda daftar belah ketupat ───────────────────────────────── */
+.diamond-marker {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background-color: var(--janur-muda);
+  transform: rotate(45deg);
+  flex-shrink: 0;
+}
+
+/* ─── Utilitas teks ──────────────────────────────────────────────── */
+.text-sm   { font-size: 14px; }
+.text-base { font-size: 16px; }
+.text-xl   { font-size: 22px; }
+.text-3xl  { font-size: 36px; }
+
+.text-santan   { color: var(--santan); }
+.text-janur    { color: var(--janur-tua); }
+.text-muted    { color: #555; }
+
+/* ─── prefers-reduced-motion ─────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

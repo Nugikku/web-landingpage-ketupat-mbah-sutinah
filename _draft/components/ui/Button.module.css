@@ -1,0 +1,45 @@
+/* components/ui/Button.module.css */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 9999px;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  border: 2px solid transparent;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 150ms, color 150ms, border-color 150ms;
+}
+
+/* Varian primary — kunyit, hanya untuk CTA utama */
+.btn--primary {
+  background-color: var(--kunyit);
+  color: var(--arang);
+  border-color: var(--kunyit);
+}
+
+.btn--primary:hover,
+.btn--primary:focus-visible {
+  background-color: #c88f14;
+  border-color: #c88f14;
+}
+
+/* Varian ghost — transparan, outline janur-tua */
+.btn--ghost {
+  background-color: transparent;
+  color: var(--janur-tua);
+  border-color: var(--janur-tua);
+}
+
+.btn--ghost:hover,
+.btn--ghost:focus-visible {
+  background-color: var(--janur-tua);
+  color: var(--santan);
+}

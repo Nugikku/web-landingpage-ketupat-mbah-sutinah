@@ -1,0 +1,96 @@
+/* components/sections/Hero.module.css */
+
+.hero {
+  padding-block: clamp(48px, 8vw, 100px);
+  min-height: calc(100svh - 64px);
+  display: flex;
+  align-items: center;
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .inner {
+    grid-template-columns: 7fr 5fr;
+    gap: 64px;
+  }
+}
+
+/* Teks kiri */
+.teks {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.judul {
+  color: var(--janur-tua);
+  font-size: clamp(44px, 8vw, 80px);
+  line-height: 1.05;
+}
+
+.desk {
+  font-size: 18px;
+  color: var(--arang);
+  max-width: 52ch;
+  line-height: 1.6;
+}
+
+.aksi {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.linkMenu {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--janur-tua);
+  text-decoration: none;
+  transition: color 150ms;
+}
+
+.linkMenu:hover,
+.linkMenu:focus-visible {
+  color: var(--janur-muda);
+}
+
+/* Visual kanan */
+.visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.weave {
+  width: clamp(200px, 40vw, 320px);
+  height: clamp(200px, 40vw, 320px);
+  filter: drop-shadow(0 8px 32px rgba(31, 77, 43, 0.15));
+}
+
+/* Mobile: anyaman di atas */
+@media (max-width: 767px) {
+  .inner {
+    direction: ltr; /* pastikan urutan normal */
+  }
+
+  .visual {
+    order: -1;
+  }
+
+  .weave {
+    width: 200px;
+    height: 200px;
+  }
+
+  .hero {
+    min-height: auto;
+  }
+}

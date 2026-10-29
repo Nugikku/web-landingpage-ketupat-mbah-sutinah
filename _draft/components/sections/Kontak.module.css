@@ -1,0 +1,122 @@
+/* components/sections/Kontak.module.css */
+
+.kontak {}
+
+.inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+  margin-top: 8px;
+}
+
+@media (min-width: 768px) {
+  .inner {
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+}
+
+.subJudul {
+  font-size: 20px;
+  color: var(--janur-tua);
+  margin-bottom: 20px;
+}
+
+/* Langkah pesan */
+.langkah {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.langkahItem {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.nomor {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background-color: var(--janur-tua);
+  color: var(--santan);
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 9999px;
+  flex-shrink: 0;
+}
+
+.langkahItem span:last-child {
+  padding-top: 4px;
+  font-size: 16px;
+  color: var(--arang);
+}
+
+/* CTA */
+.cta {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.telepon {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--janur-tua);
+  text-decoration: none;
+  transition: color 150ms;
+}
+
+.telepon:hover,
+.telepon:focus-visible {
+  color: var(--janur-muda);
+}
+
+/* Info kontak */
+.dl {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.dlItem {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 8px;
+  font-size: 15px;
+}
+
+.dlItem dt {
+  font-weight: 700;
+  color: var(--janur-tua);
+}
+
+.dlItem dd {
+  color: var(--arang);
+}
+
+/* Tautan peta */
+.peta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--janur-tua);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 150ms;
+}
+
+.peta:hover,
+.peta:focus-visible {
+  color: var(--janur-muda);
+}

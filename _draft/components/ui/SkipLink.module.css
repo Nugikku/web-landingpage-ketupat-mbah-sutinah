@@ -1,0 +1,17 @@
+/* components/ui/SkipLink.module.css */
+.skip {
+  position: fixed;
+  top: -100%;
+  left: 16px;
+  z-index: 9999;
+  padding: 12px 20px;
+  background: var(--janur-tua);
+  color: var(--santan);
+  font-weight: 700;
+  border-radius: 0 0 8px 8px;
+  transition: top 150ms;
+}
+
+.skip:focus {
+  top: 0;
+}
