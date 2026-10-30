@@ -17,12 +17,12 @@ const plusJakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata = {
-  title: "Ketupat Ibu Sri — Ketupat Matang & Paket Lebaran, Surakarta",
+  title: "Ketupat Mbah Sutinah — Ketupat Matang & Paket Lebaran, Surakarta",
   description:
     "Pesan ketupat matang, paket lebaran, dan ketupat mentah (selongsong) di Surakarta. Diantar ke rumah, kantor, atau lokasi hajatan. Hubungi lewat WhatsApp.",
   keywords: ["ketupat", "ketupat lebaran", "ketupat surakarta", "pesan ketupat", "ketupat matang"],
   openGraph: {
-    title: "Ketupat Ibu Sri — Ketupat Matang & Paket Lebaran",
+    title: "Ketupat Mbah Sutinah — Ketupat Matang & Paket Lebaran",
     description:
       "Ketupat yang dianyam tangan, dimasak sampai pulen. Pesan via WhatsApp, diantar di Surakarta.",
     locale: "id_ID",

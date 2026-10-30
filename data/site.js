@@ -1,6 +1,6 @@
 // data/site.js — Ganti semua nilai placeholder sebelum deploy
 export const site = {
-  nama: "Ketupat Ibu Sri",
+  nama: "Ketupat Mbah Sutinah",
   tagline: "Ketupat yang dianyam tangan, dimasak sampai pulen.",
   deskripsi:
     "Pesan untuk keluarga, kantor, atau hajatan. Diantar di Surakarta dan sekitarnya.",

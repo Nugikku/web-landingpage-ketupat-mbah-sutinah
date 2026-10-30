@@ -1,7 +1,7 @@
 // app/opengraph-image.jsx — OG image saat dibagikan di media sosial
 import { ImageResponse } from "next/og";
 
-export const alt = "Ketupat Ibu Sri — Ketupat Matang & Paket Lebaran";
+export const alt = "Ketupat Mbah Sutinah — Ketupat Matang & Paket Lebaran";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -43,7 +43,7 @@ export default function OGImage() {
             maxWidth: 800,
           }}
         >
-          Ketupat Ibu Sri
+          Ketupat Mbah Sutinah
         </div>
         <div
           style={{
