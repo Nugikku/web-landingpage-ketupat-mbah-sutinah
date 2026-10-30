@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <!-- Belah ketupat luar -->
+  <polygon points="16,2 30,16 16,30 2,16" fill="#1F4D2B"/>
+  <!-- Belah ketupat dalam (anyaman) -->
+  <polygon points="16,8 24,16 16,24 8,16" fill="none" stroke="#8DB255" stroke-width="2"/>
+  <!-- Titik tengah -->
+  <circle cx="16" cy="16" r="3" fill="#E0A21B"/>
+</svg>
