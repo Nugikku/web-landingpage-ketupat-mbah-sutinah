@@ -1,7 +1,7 @@
 // components/sections/Hero.jsx
-// Server component — animasi di KetupatWeave (client)
+// Server component — animasi di KetupatHang (client)
 
-import KetupatWeave from "@/components/ui/KetupatWeave";
+import KetupatHang from "@/components/ui/KetupatHang";
 import Button from "@/components/ui/Button";
 import { site } from "@/data/site";
 import { pesanUmum } from "@/lib/whatsapp";
@@ -43,9 +43,9 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Anyaman ketupat — menggambar diri saat load */}
+        {/* Ketupat bergantung — animasi fisika */}
         <div className={styles.visual} aria-hidden="true">
-          <KetupatWeave variant="hero" className={styles.weave} />
+          <KetupatHang className={styles.hang} />
         </div>
       </div>
     </section>

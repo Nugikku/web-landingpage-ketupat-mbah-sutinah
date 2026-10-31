@@ -12,17 +12,18 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: clamp(32px, 5vw, 64px);
-  align-items: center;
+  align-items: stretch; /* penting: kedua kolom setinggi grid row */
 }
 
 @media (min-width: 768px) {
   .inner {
     grid-template-columns: 7fr 5fr;
     gap: clamp(40px, 6vw, 64px);
+    align-items: center;
   }
 }
 
-/* Teks kiri */
+/* ─── Kolom teks (kiri) ─────────────────────────────────────────── */
 .teks {
   display: flex;
   flex-direction: column;
@@ -67,24 +68,22 @@
 .linkMenu:hover,
 .linkMenu:focus-visible {
   color: var(--janur-muda);
-  background-color: rgba(31, 77, 43, 0.05);
+  background-color: rgba(31, 77, 43, 0.06);
 }
 
-/* Visual kanan */
+/* ─── Kolom visual ketupat bergantung (kanan) ─────────────────────── */
 .visual {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 12px;
+  position: relative;
+  /* Tinggi minimum agar ada ruang cukup untuk 3 ketupat */
+  min-height: clamp(320px, 55vw, 520px);
 }
 
-.weave {
-  width: clamp(220px, 34vw, 340px);
-  height: clamp(220px, 34vw, 340px);
-  filter: drop-shadow(0 12px 36px rgba(31, 77, 43, 0.16));
+.hang {
+  position: absolute;
+  inset: 0;
 }
 
-/* Mobile: anyaman di atas */
+/* ─── Mobile ──────────────────────────────────────────────────────── */
 @media (max-width: 767px) {
   .hero {
     min-height: auto;
@@ -94,12 +93,7 @@
 
   .visual {
     order: -1;
-    padding: 0;
-  }
-
-  .weave {
-    width: clamp(180px, 55vw, 240px);
-    height: clamp(180px, 55vw, 240px);
+    min-height: clamp(260px, 72vw, 380px);
   }
 
   .aksi {
