@@ -1,41 +1,57 @@
 /* components/sections/Kontak.module.css */
 
-.kontak {}
+.kontak {
+  /* latar santan */
+}
+
+.kontak h2 {
+  font-size: clamp(28px, 4vw, 36px);
+  margin-bottom: 0;
+}
 
 .inner {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 48px;
-  margin-top: 8px;
+  gap: clamp(32px, 5vw, 64px);
+  margin-top: 16px;
+  align-items: start;
 }
 
 @media (min-width: 768px) {
   .inner {
     grid-template-columns: 1fr 1fr;
-    gap: 64px;
-    align-items: start;
   }
 }
 
 .subJudul {
-  font-size: 20px;
+  font-size: 22px;
   color: var(--janur-tua);
   margin-bottom: 20px;
 }
 
-/* Langkah pesan */
+/* Langkah pesan (kiri) */
+.cara {
+  display: flex;
+  flex-direction: column;
+}
+
 .langkah {
   list-style: none;
   display: flex;
   flex-direction: column;
   gap: 16px;
   margin-bottom: 32px;
+  padding: 0;
 }
 
 .langkahItem {
   display: flex;
   gap: 16px;
   align-items: flex-start;
+  padding: 10px 14px;
+  background-color: rgba(255, 255, 255, 0.45);
+  border-radius: 8px;
+  border: 1px solid var(--daun-pucat);
 }
 
 .nomor {
@@ -50,36 +66,50 @@
   font-weight: 700;
   border-radius: 9999px;
   flex-shrink: 0;
+  margin-top: 1px;
 }
 
 .langkahItem span:last-child {
-  padding-top: 4px;
-  font-size: 16px;
+  font-size: 15px;
   color: var(--arang);
+  line-height: 1.5;
 }
 
 /* CTA */
 .cta {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 18px;
   flex-wrap: wrap;
 }
 
 .telepon {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 14px;
+  border-radius: 9999px;
   font-size: 16px;
   font-weight: 700;
   color: var(--janur-tua);
   text-decoration: none;
-  transition: color 150ms;
+  transition: color 150ms ease, background-color 150ms ease;
 }
 
 .telepon:hover,
 .telepon:focus-visible {
   color: var(--janur-muda);
+  background-color: rgba(31, 77, 43, 0.05);
 }
 
-/* Info kontak */
+/* Info kontak (kanan - card) */
+.info {
+  background-color: #ffffff;
+  padding: clamp(20px, 3.5vw, 32px);
+  border-radius: 12px;
+  border: 1px solid var(--daun-pucat);
+  box-shadow: 0 4px 20px rgba(31, 77, 43, 0.05);
+}
+
 .dl {
   display: flex;
   flex-direction: column;
@@ -89,9 +119,16 @@
 
 .dlItem {
   display: grid;
-  grid-template-columns: 100px 1fr;
-  gap: 8px;
+  grid-template-columns: 90px 1fr;
+  gap: 12px;
   font-size: 15px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(220, 230, 200, 0.6);
+}
+
+.dlItem:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
 }
 
 .dlItem dt {
@@ -101,6 +138,7 @@
 
 .dlItem dd {
   color: var(--arang);
+  line-height: 1.5;
 }
 
 /* Tautan peta */
@@ -108,15 +146,18 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-size: 15px;
-  font-weight: 500;
+  padding: 9px 18px;
+  border-radius: 9999px;
+  background-color: rgba(31, 77, 43, 0.07);
+  font-size: 14px;
+  font-weight: 600;
   color: var(--janur-tua);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  transition: color 150ms;
+  text-decoration: none;
+  transition: background-color 150ms ease, color 150ms ease;
 }
 
 .peta:hover,
 .peta:focus-visible {
-  color: var(--janur-muda);
+  background-color: var(--janur-tua);
+  color: var(--santan);
 }
