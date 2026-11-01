@@ -13,7 +13,6 @@ const MAX_DT     = 1 / 20;
 const SEGMENTS   = 10;
 const ITERATIONS = 14;
 const TAIL_INV_MASS = 0.25;   // ujung tali lebih berat dari segmen lain
-const MAX_THROW  = 12;        // batas kecepatan lempar (px/langkah)
 const REST_EPS   = 0.05;      // ambang "sudah tenang"
 const GAP        = 14;        // jarak titik gantung ke puncak ketupat
 
@@ -26,11 +25,11 @@ const LIGHT = {
 };
 
 const KETUPAT_DEFS = [
-  { axRel: 0.22, lenRel: 0.28, sizeBase: 68, introAngle: 0.82,
+  { axRel: 0.28, lenRel: 0.22, sizeBase: 68, introAngle: 0.55,
     tone: DARK,  tie: '#8DB255', cord: '#2B5A37' },
-  { axRel: 0.78, lenRel: 0.48, sizeBase: 76, introAngle: 1.05,
+  { axRel: 0.72, lenRel: 0.34, sizeBase: 76, introAngle: 0.60,
     tone: LIGHT, tie: '#1F4D2B', cord: '#537C33' },
-  { axRel: 0.50, lenRel: 0.70, sizeBase: 92, introAngle: 0.92,
+  { axRel: 0.50, lenRel: 0.50, sizeBase: 92, introAngle: 0.92,
     tone: DARK,  tie: '#E0A21B', cord: '#2B5A37' },
 ];
 
@@ -279,11 +278,28 @@ function bodyAngle(rope) {
 }
 
 function bodyCenter(rope) {
+  // Pusat badan ketupat = tail + offset searah tali menuju sprite center
+  // sprite digambar: oy dari tail, lalu GAP ke simpul, lalu size ke tengah belah ketupat
   const n = rope.nodes;
   const tail = n[n.length - 1];
   const a = bodyAngle(rope);
-  const d = GAP + rope.size;
-  return { x: tail.x + Math.sin(a) * d, y: tail.y + Math.cos(a) * d };
+  const d = GAP + rope.size; // jarak tail → pusat badan
+  // bodyAngle = atan2(dx, dy) jadi komponen: sin→x, cos→y (ke bawah)
+  return {
+    x: tail.x + Math.sin(a) * d,
+    y: tail.y + Math.cos(a) * d,
+  };
+}
+
+// Bounding-box hitTest menggunakan 4 titik ujung belah ketupat → lebih luas & akurat
+function pointInDiamond(px, py, cx, cy, size) {
+  const w = size * 0.9;
+  const s = size;
+  // transformasi balik ke koordinat belah ketupat (tanpa rotasi karena sudut kecil)
+  const dx = Math.abs(px - cx);
+  const dy = Math.abs(py - cy);
+  // belah ketupat: |dx/w| + |dy/s| <= 1, dengan margin 20%
+  return (dx / w) + (dy / s) <= 1.2;
 }
 
 function drawBody(ctx, rope) {
@@ -327,10 +343,6 @@ export default function KetupatHang({ className = '' }) {
     let H = 0;
     let dpr = 1;
 
-    let grabbed = null; // { index, offX, offY }
-    let pointerX = 0;
-    let pointerY = 0;
-
     const initSimulation = (withIntro) => {
       dpr = Math.min(window.devicePixelRatio || 1, 2);
       W = Math.max(1, container.clientWidth);
@@ -343,17 +355,20 @@ export default function KetupatHang({ className = '' }) {
       chains = KETUPAT_DEFS.map((def, i) => {
         const size = Math.round(def.sizeBase * scale);
         const ax = W * def.axRel;
-        const maxLen = H - GAP - size * 2.6 - 8;
+        const maxLen = Math.min(280, H * 0.55 - GAP - size * 2.6 - 8);
         const totalLen = Math.max(40, Math.min(H * def.lenRel, maxLen));
 
         // sudut awal dibatasi agar ketupat tidak keluar dari layar
         let angle = 0;
         if (withIntro) {
-          const room = (W - ax - size * 1.1 - 8) / totalLen;
-          angle = Math.min(def.introAngle, Math.asin(Math.max(0, Math.min(1, room))));
+          // sisi kiri: ruang ke kiri, sisi kanan: ruang ke kanan
+          const roomRight = (W - ax - size * 1.2 - 4) / totalLen;
+          const roomLeft  = (ax - size * 1.2 - 4) / totalLen;
+          const room = Math.min(roomRight, roomLeft);
+          angle = Math.min(def.introAngle, Math.asin(Math.max(0, Math.min(0.9, room))));
         }
 
-        const rope = makeRope(ax, 0, totalLen, SEGMENTS, angle);
+        const rope = makeRope(ax, 40, totalLen, SEGMENTS, angle);
         rope.size = size;
         rope.def = def;
         rope.sprite = makeSprite(def, size, dpr);
@@ -386,14 +401,9 @@ export default function KetupatHang({ className = '' }) {
 
       let steps = 0;
       while (acc >= FIXED_DT && steps < 6) {
-        chains.forEach((rope, i) => {
-          const isGrab = grabbed && grabbed.index === i;
-          if (!isGrab && elapsed < rope.hold) return;
-          stepRope(
-            rope,
-            FIXED_DT,
-            isGrab ? { x: pointerX + grabbed.offX, y: pointerY + grabbed.offY } : null
-          );
+        chains.forEach((rope) => {
+          if (elapsed < rope.hold) return;
+          stepRope(rope, FIXED_DT, null);
         });
         acc -= FIXED_DT;
         steps++;
@@ -414,70 +424,10 @@ export default function KetupatHang({ className = '' }) {
       });
 
       // berhenti menggambar saat sudah tenang (hemat baterai)
-      const settled = !grabbed && elapsed > holdMax && motion < REST_EPS;
+      const settled = elapsed > holdMax && motion < REST_EPS;
       restFrames = settled ? restFrames + 1 : 0;
       if (restFrames < 30 && visible) raf = requestAnimationFrame(tick);
     }
-
-    // ── Interaksi ──────────────────────────────────────────────────
-    const getPoint = (e) => {
-      const r = canvas.getBoundingClientRect();
-      return { x: e.clientX - r.left, y: e.clientY - r.top };
-    };
-
-    const hitTest = (px, py) => {
-      for (let i = chains.length - 1; i >= 0; i--) {
-        const c = bodyCenter(chains[i]);
-        if (Math.hypot(px - c.x, py - c.y) <= chains[i].size * 1.05) return i;
-      }
-      return -1;
-    };
-
-    const onDown = (e) => {
-      const p = getPoint(e);
-      pointerX = p.x;
-      pointerY = p.y;
-      const index = hitTest(p.x, p.y);
-      if (index < 0) return;
-      const tail = chains[index].nodes[chains[index].nodes.length - 1];
-      grabbed = { index, offX: tail.x - p.x, offY: tail.y - p.y };
-      tail.w = 0; // saat ditarik, ujung tali mengikuti penuh
-      canvas.style.cursor = 'grabbing';
-      canvas.setPointerCapture?.(e.pointerId);
-      e.preventDefault();
-      wake();
-    };
-
-    const onMove = (e) => {
-      const p = getPoint(e);
-      pointerX = p.x;
-      pointerY = p.y;
-      if (!grabbed) canvas.style.cursor = hitTest(p.x, p.y) >= 0 ? 'grab' : '';
-    };
-
-    const onUp = (e) => {
-      if (!grabbed) return;
-      const tail = chains[grabbed.index].nodes[chains[grabbed.index].nodes.length - 1];
-      tail.w = TAIL_INV_MASS;
-      // batasi kecepatan lempar
-      const vx = tail.x - tail.px;
-      const vy = tail.y - tail.py;
-      const v = Math.hypot(vx, vy);
-      if (v > MAX_THROW) {
-        const f = MAX_THROW / v;
-        tail.px = tail.x - vx * f;
-        tail.py = tail.y - vy * f;
-      }
-      grabbed = null;
-      canvas.style.cursor = '';
-      canvas.releasePointerCapture?.(e.pointerId);
-      wake();
-    };
-
-    canvas.addEventListener('pointerdown', onDown);
-    canvas.addEventListener('pointermove', onMove);
-    canvas.addEventListener('pointerup', onUp);
-    canvas.addEventListener('pointercancel', onUp);
 
     // ── Resize & visibilitas ───────────────────────────────────────
     const resizeObserver = new ResizeObserver(() => {
@@ -503,10 +453,6 @@ export default function KetupatHang({ className = '' }) {
       cancelAnimationFrame(raf);
       resizeObserver.disconnect();
       io.disconnect();
-      canvas.removeEventListener('pointerdown', onDown);
-      canvas.removeEventListener('pointermove', onMove);
-      canvas.removeEventListener('pointerup', onUp);
-      canvas.removeEventListener('pointercancel', onUp);
       if (canvas.parentNode) canvas.parentNode.removeChild(canvas);
     };
   }, []);
@@ -514,7 +460,7 @@ export default function KetupatHang({ className = '' }) {
   return (
     <div
       ref={containerRef}
-      className={`relative w-full h-full overflow-hidden ${className}`.trim()}
+      className={`relative w-full h-full ${className}`.trim()}
       aria-hidden="true"
     />
   );
