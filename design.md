@@ -2,7 +2,7 @@
 
 Dokumen ini adalah acuan desain dan struktur proyek. Stack: **Next.js (App Router) + JSX**, deploy di **Vercel**.
 
-> Catatan: nama usaha belum ditentukan. Di dokumen ini dipakai placeholder **"Ketupat [Mbah Sutinah]"**. Ganti di `data/site.js`.
+> Catatan: Nama usaha resmi: **Kupatin**. Dikelola di `data/site.js`.
 
 ---
 
