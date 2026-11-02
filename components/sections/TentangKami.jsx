@@ -56,7 +56,7 @@ export default function TentangKami() {
           <KetupatWeave variant="divider" />
 
           <p>
-            Kupatin lahir dari kebiasaan memasak untuk keluarga besar
+            Kupatin atau biasa dikenal Ketupat Mbah Sutinah lahir dari kebiasaan memasak untuk keluarga besar
             saat lebaran. Dari satu kampung, pesanan mulai datang dari tetangga,
             lalu kantor, lalu hajatan. Kami masih memasak dengan cara yang sama:
             janur segar, dianyam tangan, direbus hingga pulen.
