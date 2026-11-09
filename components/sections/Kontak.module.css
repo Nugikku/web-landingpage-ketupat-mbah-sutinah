@@ -113,17 +113,18 @@
 .dl {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  margin-bottom: 24px;
+  gap: 14px;
+  margin-bottom: 0;
 }
 
 .dlItem {
   display: grid;
-  grid-template-columns: 90px 1fr;
+  grid-template-columns: minmax(145px, 175px) 1fr;
   gap: 12px;
   font-size: 15px;
   padding-bottom: 12px;
   border-bottom: 1px solid rgba(220, 230, 200, 0.6);
+  align-items: baseline;
 }
 
 .dlItem:last-child {
@@ -141,23 +142,9 @@
   line-height: 1.5;
 }
 
-/* Tautan peta */
-.peta {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 9px 18px;
-  border-radius: 9999px;
-  background-color: rgba(31, 77, 43, 0.07);
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--janur-tua);
-  text-decoration: none;
-  transition: background-color 150ms ease, color 150ms ease;
-}
-
-.peta:hover,
-.peta:focus-visible {
-  background-color: var(--janur-tua);
-  color: var(--santan);
+@media (max-width: 520px) {
+  .dlItem {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
 }

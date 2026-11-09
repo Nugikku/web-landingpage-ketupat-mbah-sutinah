@@ -118,7 +118,10 @@ const CSS = `
 .tsf-type{min-width:0;overflow:hidden;text-overflow:clip;font-weight:500;color:var(--tsf-muted)}
 .tsf-caret{display:inline-block;width:.55em;height:1.05em;margin-left:2px;vertical-align:-.18em;background:var(--tsf-accent);animation:tsf-blink 1s steps(1) infinite}
 .tsf-dots{flex:1;min-width:24px;height:10px;opacity:.5;background-image:radial-gradient(circle,var(--dot,var(--tsf-ink)) .85px,transparent 1.25px);background-size:6px 5px;background-position:0 0;-webkit-mask-image:linear-gradient(90deg,#000 0,#000 35%,rgba(0,0,0,.25) 50%,#000 65%,#000 100%);mask-image:linear-gradient(90deg,#000 0,#000 35%,rgba(0,0,0,.25) 50%,#000 65%,#000 100%);-webkit-mask-size:200% 100%;mask-size:200% 100%;animation:tsf-march 3.6s linear infinite}
-.tsf-h{margin:clamp(24px,4.2cqw,56px) 0 0;font-family:var(--tsf-serif);font-weight:400;font-size:clamp(28px,3.4cqw,50px);line-height:1.15;letter-spacing:-.02em;color:var(--tsf-ink)}
+.tsf-brand{display:flex;flex-direction:column;gap:2px;margin-top:clamp(18px,2.8cqw,32px)}
+.tsf-brand-main{font-family:var(--tsf-serif);font-size:clamp(20px,2.2cqw,28px);color:var(--tsf-ink);letter-spacing:.03em;line-height:1.1}
+.tsf-brand-sub{font-family:var(--tsf-sans);font-size:clamp(12px,1.05cqw,14px);color:var(--tsf-muted);font-weight:500}
+.tsf-h{margin:clamp(14px,2.4cqw,28px) 0 0;font-family:var(--tsf-serif);font-weight:400;font-size:clamp(28px,3.4cqw,50px);line-height:1.15;letter-spacing:-.02em;color:var(--tsf-ink)}
 .tsf-h span{display:block;overflow:hidden;padding-bottom:.06em;margin-bottom:-.06em}
 .tsf-h span span{display:block;transform:translateY(0);transition:transform .9s cubic-bezier(.2,.8,.2,1)}
 .tsf[data-seen='0'] .tsf-h span span{transform:translateY(110%)}
@@ -138,19 +141,19 @@ const CSS = `
 .tsf-orbit::before{left:0;-webkit-mask-image:linear-gradient(90deg,#000,transparent);mask-image:linear-gradient(90deg,#000,transparent)}
 .tsf-orbit::after{right:0;-webkit-mask-image:linear-gradient(270deg,#000,transparent);mask-image:linear-gradient(270deg,#000,transparent)}
 .tsf-orbit svg{position:absolute;left:0;top:0;width:100%;height:100%;max-width:none;display:block}
-.tsf-links{display:grid;grid-template-columns:repeat(var(--cols),minmax(0,1fr));gap:20px;padding:clamp(20px,2.4cqw,32px) clamp(12px,2cqw,28px) clamp(18px,2.2cqw,28px)}
+.tsf-links{display:grid;grid-template-columns:minmax(115px,0.65fr) minmax(0,1.35fr);gap:20px;padding:clamp(20px,2.4cqw,32px) clamp(12px,2cqw,28px) clamp(18px,2.2cqw,28px)}
 .tsf-links h3{margin:0 0 clamp(12px,1.6cqw,20px);font-family:var(--tsf-serif);font-weight:400;font-size:clamp(18px,2cqw,26px);color:var(--tsf-ink)}
-.tsf-links ul{list-style:none;margin:0;padding:0;display:grid;gap:clamp(5px,.6cqw,10px)}
-.tsf-link{position:relative;display:inline-flex;align-items:center;font-size:clamp(13px,1.15cqw,15px);line-height:1.5;color:var(--tsf-muted);transition:color .25s,transform .35s cubic-bezier(.2,.8,.2,1)}
-.tsf-link::before{content:'';position:absolute;left:-12px;top:50%;width:5px;height:5px;margin-top:-2.5px;background:var(--tsf-accent);transform:rotate(45deg) scale(0);transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+.tsf-links ul{list-style:none;margin:0;padding:0;display:grid;gap:clamp(6px,.7cqw,10px)}
+.tsf-link{position:relative;display:inline-flex;align-items:flex-start;font-size:clamp(13px,1.1cqw,14.5px);line-height:1.5;color:var(--tsf-muted);transition:color .25s,transform .35s cubic-bezier(.2,.8,.2,1)}
+.tsf-link::before{content:'';position:absolute;left:-12px;top:0.55em;width:5px;height:5px;background:var(--tsf-accent);transform:rotate(45deg) scale(0);transition:transform .3s cubic-bezier(.2,.8,.2,1)}
 .tsf-link:hover,.tsf-link:focus-visible{color:var(--tsf-ink);transform:translateX(10px)}
 .tsf-link:hover::before,.tsf-link:focus-visible::before{transform:rotate(45deg) scale(1)}
 
 /* Footer Baris Bawah */
 .tsf-foot{grid-column:1/-1;grid-row:4;display:grid;grid-template-columns:var(--rail) var(--nav) var(--rail) minmax(0,1fr) var(--rail) minmax(0,1fr) var(--rail);align-items:center;min-height:clamp(56px,6cqw,80px);font-size:clamp(11.5px,1cqw,13.5px)}
-.tsf-copy{grid-column:2/4;padding-left:0;color:color-mix(in srgb,var(--tsf-ink) 85%,transparent);white-space:nowrap}
+.tsf-copy{grid-column:2/5;padding-left:0;padding-right:16px;color:color-mix(in srgb,var(--tsf-ink) 85%,transparent);line-height:1.4}
 .tsf-foot .tsf-dots{--dot:var(--tsf-muted)}
-.tsf-foot-l{grid-column:4;display:flex;padding-right:45%}
+.tsf-foot-l{display:none}
 .tsf-foot-r{grid-column:6;display:flex;align-items:center;gap:clamp(14px,2.6cqw,32px);white-space:nowrap}
 .tsf-foot-r>span{color:var(--tsf-muted)}
 .tsf-foot-r a{position:relative;color:color-mix(in srgb,var(--tsf-ink) 85%,transparent);transition:color .2s}
@@ -180,6 +183,9 @@ const CSS = `
 .tsf-foot-l{display:none}
 .tsf-foot-r{flex:1;flex-wrap:wrap;gap:12px 20px}
 .tsf-foot-r .tsf-dots{display:none}
+}
+@container (max-width: 520px){
+.tsf-links{grid-template-columns:1fr;gap:24px}
 }
 
 @media (prefers-reduced-motion: reduce){
@@ -447,22 +453,21 @@ function Orbit({ reduced, visible, pulse }) {
 }
 
 const DEFAULT_SECTIONS = [
-  { label: "Beranda", href: "#" },
+  { label: "Beranda", href: "#beranda" },
   { label: "Menu Ketupat", href: "#produk" },
   { label: "Tentang Kami", href: "#tentang" },
-  { label: "Cara Pesan", href: "#kontak" },
-  { label: "Lokasi & Peta", href: "#kontak" },
+  { label: "Cara Pemesanan", href: "#kontak" },
 ];
 
 const DEFAULT_EYEBROW = [
-  "Dapur Ketupat Tradisional",
+  "KUPATIN by Ketupat Mbah Sutinah",
   "Janur kelapa segar & beras pilihan",
-  "Dimasak pulen, siap antar ke rumah",
+  "Dimasak pulen, siap antar di Solo Raya",
 ];
 
 export default function Footer({
-  brand = site.nama,
-  company = site.nama,
+  brand = site.namaLengkap,
+  company = site.namaLengkap,
   year = new Date().getFullYear(),
   sections = DEFAULT_SECTIONS,
   defaultSection = 0,
@@ -474,21 +479,26 @@ export default function Footer({
   onCtaClick,
   linkGroups = [
     {
-      title: "Menu & Usaha",
+      title: "Navigasi",
       links: [
-        { label: "Menu Utama", href: "#produk" },
-        { label: "Tentang Dapur", href: "#tentang" },
+        { label: "Beranda", href: "#beranda" },
+        { label: "Menu Ketupat", href: "#produk" },
+        { label: "Tentang Kami", href: "#tentang" },
         { label: "Cara Pemesanan", href: "#kontak" },
-        { label: "Lokasi di Maps", href: site.peta },
       ],
     },
     {
-      title: "Kontak & Jam",
+      title: "Kontak & Informasi",
       links: [
-        { label: "WhatsApp Pemesanan", href: pesanUmum() },
-        { label: site.jamBuka },
-        { label: site.areaAntar },
-        { label: site.alamat },
+        {
+          label: `WhatsApp Pemesanan: ${site.whatsappTampil}`,
+          href: pesanUmum(),
+        },
+        { label: `Pengambilan langsung: ${site.pengambilan}` },
+        { label: `Pengantaran pesanan: ${site.pengantaran}` },
+        { label: `Area pengantaran: ${site.areaAntar}` },
+        { label: `Sistem pemesanan: ${site.sistemPesan}` },
+        { label: `Alamat: ${site.alamat}` },
       ],
     },
   ],
@@ -600,8 +610,7 @@ export default function Footer({
                       href={s.href}
                       className="tsf-nav-item"
                       aria-current={section === i ? "true" : undefined}
-                      onClick={(e) => {
-                        hold(s.href)(e);
+                      onClick={() => {
                         pick(i);
                       }}
                     >
@@ -624,9 +633,13 @@ export default function Footer({
           <span className="tsf-nav-bar" style={{ "--i": section }} aria-hidden="true" />
         </nav>
 
-        {/* Hero Footer */}
+        {/* Hero Footer / Kolom Identitas */}
         <div className="tsf-hero">
           <Eyebrow phrases={eyebrow} reduced={reduced} visible={visible} />
+          <div className="tsf-brand">
+            <span className="tsf-brand-main">{site.nama}</span>
+            <span className="tsf-brand-sub">{site.subNama}</span>
+          </div>
           <h2 className="tsf-h">
             {headline.map((line, i) => (
               <span key={i}>

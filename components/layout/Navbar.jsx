@@ -11,12 +11,29 @@ import styles from "./Navbar.module.css";
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [activeId, setActiveId] = useState("beranda");
   const menuRef = useRef(null);
   const toggleRef = useRef(null);
 
-  // Efek bayangan lebih pekat saat halaman digulir
+  // Efek bayangan lebih pekat saat halaman digulir + deteksi section aktif
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 8);
+    const sectionIds = ["beranda", "produk", "tentang", "kontak"];
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 8);
+      const offset = 140;
+      let current = "beranda";
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= offset) {
+            current = id;
+          }
+        }
+      }
+      setActiveId(current);
+    };
+    handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -53,9 +70,10 @@ export default function Navbar() {
   const closeMenu = useCallback(() => setOpen(false), []);
 
   const navLinks = [
-    { href: "#produk", label: "Produk" },
-    { href: "#tentang", label: "Tentang" },
-    { href: "#kontak", label: "Kontak" },
+    { href: "#beranda", id: "beranda", label: "Beranda" },
+    { href: "#produk", id: "produk", label: "Menu Ketupat" },
+    { href: "#tentang", id: "tentang", label: "Tentang Kami" },
+    { href: "#kontak", id: "kontak", label: "Cara Pemesanan" },
   ];
 
   return (
@@ -70,26 +88,30 @@ export default function Navbar() {
         >
           {/* Logo / nama usaha */}
           <a
-            href="#"
+            href="#beranda"
             className={styles.logo}
-            aria-label={`${site.nama} — ke halaman atas`}
+            aria-label={`${site.namaLengkap} — ke Beranda`}
           >
             <span className={styles.logoDiamond} aria-hidden="true">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 2L22 12L12 22L2 12Z" />
               </svg>
             </span>
-            <span>{site.nama}</span>
+            <span className={styles.logoText}>
+              <span className={styles.logoMain}>{site.nama}</span>
+              <span className={styles.logoSub}>{site.subNama}</span>
+            </span>
           </a>
 
           {/* Navigasi desktop (tengah) */}
           <nav className={styles.navCenter} aria-label="Navigasi utama">
             <ul className={styles.links} role="list">
-              {navLinks.map(({ href, label }, i) => (
+              {navLinks.map(({ href, id, label }, i) => (
                 <li key={href}>
                   <motion.a
                     href={href}
-                    className={styles.link}
+                    className={`${styles.link} ${activeId === id ? styles.linkActive : ""}`}
+                    aria-current={activeId === id ? "page" : undefined}
                     initial={{ opacity: 0, y: -6 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.25, delay: i * 0.05 + 0.1 }}
@@ -165,14 +187,17 @@ export default function Navbar() {
           >
             {/* Header di dalam panel mobile */}
             <div className={styles.mobilePanelHeader}>
-              <div className={styles.logo}>
+              <a href="#beranda" className={styles.logo} onClick={closeMenu}>
                 <span className={styles.logoDiamond} aria-hidden="true">
                   <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M12 2L22 12L12 22L2 12Z" />
                   </svg>
                 </span>
-                <span>{site.nama}</span>
-              </div>
+                <span className={styles.logoText}>
+                  <span className={styles.logoMain}>{site.nama}</span>
+                  <span className={styles.logoSub}>{site.subNama}</span>
+                </span>
+              </a>
               <motion.button
                 className={styles.mobileCloseBtn}
                 aria-label="Tutup menu"
@@ -198,7 +223,7 @@ export default function Navbar() {
 
             {/* Daftar tautan navigasi */}
             <ul role="list" className={styles.mobileLinks}>
-              {navLinks.map(({ href, label }, i) => (
+              {navLinks.map(({ href, id, label }, i) => (
                 <motion.li
                   key={href}
                   initial={{ opacity: 0, x: 20 }}
@@ -206,7 +231,12 @@ export default function Navbar() {
                   exit={{ opacity: 0, x: 20 }}
                   transition={{ delay: i * 0.06 + 0.06 }}
                 >
-                  <a href={href} className={styles.mobileLink} onClick={closeMenu}>
+                  <a
+                    href={href}
+                    className={styles.mobileLink}
+                    aria-current={activeId === id ? "page" : undefined}
+                    onClick={closeMenu}
+                  >
                     <span>{label}</span>
                     <span className={styles.mobileLinkArrow} aria-hidden="true">
                       →
@@ -233,7 +263,7 @@ export default function Navbar() {
                 Pesan via WhatsApp
               </motion.a>
               <p className={styles.mobileMeta}>
-                {site.jamBuka} • {site.areaAntar}
+                Pre-order • Area {site.areaAntar} • {site.whatsappTampil}
               </p>
             </div>
           </motion.div>

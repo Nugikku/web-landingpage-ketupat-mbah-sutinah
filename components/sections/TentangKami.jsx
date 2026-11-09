@@ -23,29 +23,13 @@ export default function TentangKami() {
         {/* Kolom foto */}
         <div className={styles.foto}>
           <div className={styles.imgWrap}>
-            {/* Placeholder warna — ganti dengan next/image + foto asli */}
-            <div className={styles.imgPlaceholder} aria-label="Foto dapur atau proses pembuatan ketupat">
-              <svg
-                viewBox="0 0 200 200"
-                width="80"
-                height="80"
-                aria-hidden="true"
-              >
-                <polygon
-                  points="100,10 190,100 100,190 10,100"
-                  fill="none"
-                  stroke="var(--janur-muda)"
-                  strokeWidth="3"
-                />
-                <polygon
-                  points="100,35 165,100 100,165 35,100"
-                  fill="none"
-                  stroke="var(--janur-tua)"
-                  strokeWidth="2"
-                />
-              </svg>
-              <span className={styles.imgPlaceholderText}>Foto dapur / proses</span>
-            </div>
+            <Image
+              src="/images/tentang/tentang-kami.jpg"
+              alt="Ketupat KUPATIN by Ketupat Mbah Sutinah di atas meja kayu"
+              width={600}
+              height={600}
+              className={styles.img}
+            />
           </div>
           <p className={styles.caption}>Dari dapur rumah sejak {site.tahunBerdiri}</p>
         </div>
