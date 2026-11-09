@@ -14,10 +14,7 @@ const langkah = [
 ];
 
 export default function Kontak() {
-  // Format nomor tampilan: 0812-xxxx-xxxx
-  const waDisplay = site.whatsapp
-    .replace(/^62/, "0")
-    .replace(/(\d{4})(\d{4})(\d{4})/, "$1-$2-$3");
+  const waDisplay = site.whatsappTampil;
 
   return (
     <section
@@ -26,7 +23,7 @@ export default function Kontak() {
       aria-labelledby="kontak-judul"
     >
       <div className="container">
-        <h2 id="kontak-judul">Pesan ketupat</h2>
+        <h2 id="kontak-judul">Cara pemesanan</h2>
         <KetupatWeave variant="divider" />
 
         <div className={styles.inner}>
@@ -64,56 +61,58 @@ export default function Kontak() {
                 Chat WhatsApp
               </Button>
               <a
-                href={`tel:${site.whatsapp}`}
+                href={pesanUmum()}
+                target="_blank"
+                rel="noopener noreferrer"
                 className={styles.telepon}
-                aria-label={`Telepon ${waDisplay}`}
+                aria-label={`WhatsApp ${waDisplay}`}
               >
                 {waDisplay}
               </a>
             </div>
           </div>
 
-          {/* Info kontak */}
+          {/* Informasi usaha */}
           <div className={styles.info}>
-            <h3 className={styles.subJudul}>Informasi</h3>
+            <h3 className={styles.subJudul}>Informasi usaha</h3>
             <dl className={styles.dl}>
+              <div className={styles.dlItem}>
+                <dt>Nama usaha</dt>
+                <dd>{site.namaLengkap}</dd>
+              </div>
+              <div className={styles.dlItem}>
+                <dt>Pengambilan langsung</dt>
+                <dd>{site.pengambilan}</dd>
+              </div>
+              <div className={styles.dlItem}>
+                <dt>Pengantaran pesanan</dt>
+                <dd>{site.pengantaran}</dd>
+              </div>
+              <div className={styles.dlItem}>
+                <dt>Area pengantaran</dt>
+                <dd>{site.areaAntar}</dd>
+              </div>
+              <div className={styles.dlItem}>
+                <dt>Sistem pemesanan</dt>
+                <dd>{site.sistemPesan}</dd>
+              </div>
+              <div className={styles.dlItem}>
+                <dt>WhatsApp</dt>
+                <dd>
+                  <a
+                    href={pesanUmum()}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {waDisplay}
+                  </a>
+                </dd>
+              </div>
               <div className={styles.dlItem}>
                 <dt>Alamat</dt>
                 <dd>{site.alamat}</dd>
               </div>
-              <div className={styles.dlItem}>
-                <dt>Jam buka</dt>
-                <dd>{site.jamBuka}</dd>
-              </div>
-              <div className={styles.dlItem}>
-                <dt>Area antar</dt>
-                <dd>{site.areaAntar}</dd>
-              </div>
             </dl>
-
-            <a
-              href={site.peta}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.peta}
-              aria-label="Buka peta lokasi di Google Maps"
-            >
-              <svg
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                <circle cx="12" cy="10" r="3" />
-              </svg>
-              Lihat di Google Maps
-            </a>
           </div>
         </div>
       </div>

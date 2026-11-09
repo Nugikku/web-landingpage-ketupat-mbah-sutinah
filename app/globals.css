@@ -16,10 +16,17 @@
   --font-body: var(--font-plus-jakarta), system-ui, sans-serif;
 
   /* Jarak */
-  --section-gap: clamp(48px, 6vw, 84px);
+  --section-gap: clamp(56px, 7vw, 96px);
+  --navbar-offset: 86px;
   --content-max: 1120px;
   --px-mobile: 20px;
   --px-desktop: 32px;
+}
+
+@media (max-width: 767px) {
+  :root {
+    --navbar-offset: 74px;
+  }
 }
 
 /* ─── Reset ──────────────────────────────────────────────────────── */
@@ -33,7 +40,9 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: var(--navbar-offset);
   -webkit-text-size-adjust: 100%;
+  overflow-x: clip;
 }
 
 body {
@@ -44,6 +53,7 @@ body {
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   min-height: 100dvh;
+  overflow-x: clip;
 }
 
 /* ─── Gaya Fokus (aksesibilitas) ──────────────────────────────────── */
@@ -96,6 +106,12 @@ img {
 /* ─── Section spacing ────────────────────────────────────────────── */
 .section {
   padding-block: var(--section-gap);
+  scroll-margin-top: var(--navbar-offset);
+  min-height: calc(100svh - var(--navbar-offset));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-top: 1px solid var(--daun-pucat);
 }
 
 .section--alt {

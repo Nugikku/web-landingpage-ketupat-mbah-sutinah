@@ -29,7 +29,7 @@ export default function ProdukRow({ produk }) {
         <span className={styles.harga}>{hargaStr}</span>
         {satuan && <span className={styles.satuan}>{satuan}</span>}
         <a
-          href={pesanProduk(nama)}
+          href={pesanProduk()}
           target="_blank"
           rel="noopener noreferrer"
           className={styles.tombol}

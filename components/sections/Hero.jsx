@@ -9,10 +9,18 @@ import styles from "./Hero.module.css";
 
 export default function Hero() {
   return (
-    <section className={styles.hero} aria-labelledby="hero-judul">
+    <section id="beranda" className={styles.hero} aria-labelledby="hero-judul">
       <div className={`container ${styles.inner}`}>
         {/* Konten teks — rata kiri */}
         <div className={styles.teks}>
+          <p className={styles.brandBadge}>
+            <span className="diamond-marker" aria-hidden="true" />
+            <span className={styles.brandMain}>{site.nama}</span>
+            <span className={styles.brandSep} aria-hidden="true">
+              ·
+            </span>
+            <span className={styles.brandSub}>{site.subNama}</span>
+          </p>
           <h1 id="hero-judul" className={styles.judul}>
             {site.tagline}
           </h1>
